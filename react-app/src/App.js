@@ -9,7 +9,7 @@ function App() {
         <div className="App">
             <div>
                 {/*<VirtualList></VirtualList>*/}
-                {/*<RealList></RealList>*/}
+                <RealList></RealList>
                 {/*<AsyncRenderList></AsyncRenderList>*/}
             </div>
         </div>
