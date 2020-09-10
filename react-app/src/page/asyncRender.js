@@ -19,6 +19,11 @@ function AsyncRenderList() {
         function load() {
             index += 50;
             if (index < total) {
+                // requestAnimationFrame(() => {
+                //     let temp = list.slice(index, index + 50);
+                //     setAsyncList((asyncList) => [...asyncList, ...temp])
+                //     load();
+                // })
                 setTimeout(() => {
                     let temp = list.slice(index, index + 50);
                     setAsyncList((asyncList) => [...asyncList, ...temp])
