@@ -17,7 +17,7 @@ export class AppService {
         }
 
         // 生成10万条数据的list
-        for (let i = 0; i < 100000; i++) {
+        for (let i = 0; i < 100; i++) {
             list.push({
                 name: `xu_0${i}`,
                 title: genrateRandomWords(12),
