@@ -27,10 +27,20 @@ function VirtualList() {
     const handleSearch = (e) => {
         const value = e.target.value;
         setQueryTitle(value);
-        let searchData = list.filter((item, i) => {
-            return item.title.indexOf(value) > -1
-        })
-        setShowList(searchData)
+
+        // web worker处理搜索
+        const worker = new Worker('./work.js');
+        worker.postMessage({value, list});
+        worker.onmessage = function (e) {
+            console.log('main接收work返回的信息: ' ,e.data)
+            setShowList(e.data)
+        }
+
+        // 直接搜索
+        // let searchData = list.filter((item, i) => {
+        //     return item.title.indexOf(value) > -1
+        // })
+        // setShowList(searchData)
     }
 
     return (
@@ -50,6 +60,7 @@ function VirtualList() {
                 >
                     {Row}
                 </List>
+                <div style={{background: '#f40', padding: '10px'}}>共：{showList.length}条</div>
             </div>
         </div>
     );
