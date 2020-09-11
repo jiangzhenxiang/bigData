@@ -13,4 +13,6 @@ function doSomething(value, list) {
       return item.title.indexOf(value) > -1
   })
   postMessage(searchData);
+  // Worker.terminate()立即终止 Worker 线程。
+  // Worker.terminate()
 }

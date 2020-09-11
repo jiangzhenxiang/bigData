@@ -23,24 +23,32 @@ function VirtualList() {
                 setShowList(body);
             })
     }, [])
+    const worker = new Worker('./work.js');
 
     const handleSearch = (e) => {
         const value = e.target.value;
         setQueryTitle(value);
 
         // web worker处理搜索
-        const worker = new Worker('./work.js');
-        worker.postMessage({value, list});
-        worker.onmessage = function (e) {
-            console.log('main接收work返回的信息: ' ,e.data)
-            setShowList(e.data)
-        }
+        // console.time('worker')
+        // worker.postMessage({value, list});
+        // worker.onmessage = function (e) {
+        //     console.log('main接收work返回的信息: ' ,e.data)
+        //     setShowList(e.data)
+        // }
+        // console.timeEnd('worker')
+        //1W  8.39501953125 ms
+        // 10W 89.938720703125 ms
 
         // 直接搜索
-        // let searchData = list.filter((item, i) => {
-        //     return item.title.indexOf(value) > -1
-        // })
-        // setShowList(searchData)
+        console.time('list filter')
+        let searchData = list.filter((item, i) => {
+            return item.title.indexOf(value) > -1
+        })
+        setShowList(searchData)
+        console.timeEnd('list filter')
+        //     0.407958984375 ms
+
     }
 
     return (
